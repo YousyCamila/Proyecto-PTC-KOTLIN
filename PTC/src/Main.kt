@@ -1,3 +1,10 @@
+import Administrador.Clientes.CRUD
+import Administrador.Contrato
+
 fun main() {
-    println("Hello World!")
+
+    val contrato = Contrato()
+   
+
+
 }
