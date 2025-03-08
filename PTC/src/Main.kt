@@ -1,10 +1,11 @@
 import Administrador.Clientes.CRUD
 import Administrador.Contrato
+import tu.paquete.MenuPrincipal
 
 fun main() {
-
-    val contrato = Contrato()
-   
-
-
+    val menu = MenuPrincipal()
+    menu.mostrarMenu()
 }
+
+
+
