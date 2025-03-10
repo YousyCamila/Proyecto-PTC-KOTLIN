@@ -1,9 +1,11 @@
 package Casos
 
-import Models.Caso
+import Casos.Models.Caso
+import Casos.Models.Detective
+import Administrador.Clientes.Clientes
 
 class CasoService {
-    val nombresPermitidos = mapOf(
+    private val nombresPermitidos = mapOf(
         1 to "Cadena de custodia",
         2 to "Investigación de extorsión",
         3 to "Estudios de seguridad",
@@ -13,14 +15,14 @@ class CasoService {
         7 to "Recuperación de vehículos"
     )
 
-
     fun crearCaso(datos: Caso): Caso? {
         if (BaseDatosTemporal.casos.any { it.id == datos.id }) {
             println("Error: Ya existe un caso con el ID ${datos.id}")
             return null
         }
 
-        val cliente = BaseDatosTemporal.clientes.firstOrNull { it.id == datos.idCliente }
+        // Buscar cliente y detective por su ID
+        val cliente = Clientes.clientes.firstOrNull { it.persona.id == datos.idCliente }
         val detective = BaseDatosTemporal.detectives.firstOrNull { it.id == datos.idDetective }
 
         if (cliente == null || detective == null) {
@@ -35,33 +37,36 @@ class CasoService {
         }
     }
 
-    fun obtenerCasosPorClienteId(idCliente: String): List<Caso> {
-        return BaseDatosTemporal.casos.filter { it.idCliente == idCliente.trim() }
-    }
-
     fun obtenerCasosPorEmailCliente(emailCliente: String): List<Caso> {
-        return BaseDatosTemporal.clientes.find { it.correo == emailCliente }?.casos
+        val cliente = Clientes.clientes.firstOrNull { it.persona.correo == emailCliente }
             ?: throw IllegalArgumentException("No se encontró un cliente con el email: $emailCliente")
+
+        return BaseDatosTemporal.casos.filter { it.idCliente == cliente.persona.id }
     }
 
     fun obtenerCasosPorEmailDetective(emailDetective: String): List<Caso> {
-        return BaseDatosTemporal.detectives.find { it.correo == emailDetective }?.casos
+        return BaseDatosTemporal.detectives.firstOrNull { it.correo == emailDetective }?.casos
             ?: throw IllegalArgumentException("No se encontró un detective con el email: $emailDetective")
     }
 
     fun listarCasos(): List<Caso> {
-        if (BaseDatosTemporal.casos.isEmpty()) throw IllegalStateException("No hay casos registrados actualmente.")
-        return BaseDatosTemporal.casos
+        return BaseDatosTemporal.casos.takeIf { it.isNotEmpty() }
+            ?: throw IllegalStateException("No hay casos registrados actualmente.")
     }
 
     fun buscarCasoPorId(id: String): Caso {
-        return BaseDatosTemporal.casos.find { it.id == id }
+        return BaseDatosTemporal.casos.firstOrNull { it.id == id }
             ?: throw IllegalArgumentException("Caso no encontrado")
     }
 
     fun desactivarCaso(id: String): Caso {
         val caso = buscarCasoPorId(id)
-        caso.activo = false
-        return caso
+
+        if (!caso.activo) {
+            println("El caso con ID $id ya está desactivado.")
+            return caso
+        }
+
+        return caso.apply { activo = false }
     }
 }

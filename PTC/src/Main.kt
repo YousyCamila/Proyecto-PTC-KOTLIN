@@ -1,3 +1,5 @@
+import Casos.MenuDeCasos
 fun main() {
-    println("Hello World!")
+
+    MenuDeCasos()
 }

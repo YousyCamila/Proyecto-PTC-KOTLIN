@@ -1,4 +1,4 @@
-package Models
+package Casos.Models
 
 data class Caso(
     val id: String,

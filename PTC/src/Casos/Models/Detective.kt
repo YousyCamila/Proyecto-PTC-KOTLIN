@@ -1,6 +1,6 @@
-package Models
+package Casos.Models
 
-class Cliente(
+class Detective(
     val id: String,
     val correo: String,
     private val _casos: MutableList<Caso> = mutableListOf()

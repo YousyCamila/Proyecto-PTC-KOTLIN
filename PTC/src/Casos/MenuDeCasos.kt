@@ -1,6 +1,6 @@
 package Casos
 
-import Models.Caso
+import Casos.Models.Caso
 import java.util.*
 
 fun MenuDeCasos() {
