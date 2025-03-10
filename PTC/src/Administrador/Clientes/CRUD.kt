@@ -115,7 +115,7 @@ class CRUD : FunAdministrador() {
         } else {
             println("\n=== Lista de Clientes ===")
             Clientes.clientes.forEachIndexed { index, cliente ->
-                println("${index + 1}. ${cliente.persona.nombre} - ${cliente.persona.celular} - ${cliente.persona.direccion} - ${cliente.persona.correo}")
+                println("${index + 1}. ${cliente.persona.id} - ${cliente.persona.nombre} - ${cliente.persona.celular} - ${cliente.persona.direccion} - ${cliente.persona.correo}")
             }
         }
     }

@@ -8,7 +8,7 @@ class Clientes(val persona: Persona) {
     private val casos = mutableListOf<Caso>()
 
     private fun datosCliente() {
-
+        println("Id ${persona.id}  ")
         println("Cliente ${persona.nombre}  ")
         println("Celular: ${persona.celular}")
         println("Dirección: ${persona.direccion}")

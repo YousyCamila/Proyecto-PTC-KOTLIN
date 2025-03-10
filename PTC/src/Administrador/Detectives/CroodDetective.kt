@@ -1,11 +1,15 @@
 package Administrador.Detectives
-
 import Administrador.FunAdministrador
 import Persona.Persona
+import java.io.IO.*
 
-class Crood etective : FunAdministrador() {
+class CroodDetective : FunAdministrador() {
 
     override fun crear() {
+
+        print("Ingrese el id del detective: ")
+        val idDetective = readln()
+
         print("Ingrese el nombre del detective: ")
         val nomDetective = readln()
 
@@ -21,7 +25,7 @@ class Crood etective : FunAdministrador() {
         print("Ingrese el correo: ")
         val correoDetective = readln()
 
-        val nuevoDetective = Detective(Persona(nomDetective, celDetective, direccDetective, correoDetective))
+        val nuevoDetective = Detectives(Persona(idDetective, nomDetective, celDetective, direccDetective, correoDetective))
         Detectives.listaDetectives.add(nuevoDetective)
 
         println("Detective agregado exitosamente.")
@@ -46,27 +50,31 @@ class Crood etective : FunAdministrador() {
 
         val detectiveSeleccionado = Detectives.listaDetectives[seleccion - 1]
         println("Editando detective: ${detectiveSeleccionado.persona.nombre}")
-
-        println("1. Nombre")
-        println("2. Celular")
-        println("3. Dirección")
-        println("4. Correo")
+        println("1. Id")
+        println("2. Nombre")
+        println("3. Celular")
+        println("4. Dirección")
+        println("5. Correo")
         print("Seleccione el campo a editar: ")
 
         when (readln()) {
             "1" -> {
+                print("Ingrese el id ")
+                detectiveSeleccionado.persona.id = readln()
+            }
+            "2" -> {
                 print("Ingrese el nuevo nombre: ")
                 detectiveSeleccionado.persona.nombre = readln()
             }
-            "2" -> {
+            "3" -> {
                 print("Ingrese el nuevo celular: ")
                 detectiveSeleccionado.persona.celular = readln().toIntOrNull() ?: return println("Número inválido.")
             }
-            "3" -> {
+            "4" -> {
                 print("Ingrese la nueva dirección: ")
                 detectiveSeleccionado.persona.direccion = readln()
             }
-            "4" -> {
+            "5" -> {
                 print("Ingrese el nuevo correo: ")
                 detectiveSeleccionado.persona.correo = readln()
             }
@@ -112,7 +120,7 @@ class Crood etective : FunAdministrador() {
         } else {
             println("\n=== Lista de Detectives ===")
             Detectives.listaDetectives.forEachIndexed { index, detective ->
-                println("${index + 1}. ${detective.persona.nombre} - ${detective.persona.celular} - ${detective.persona.direccion} - ${detective.persona.correo}")
+                println("${index + 1}. ${detective.persona.id} - ${detective.persona.nombre} - ${detective.persona.celular} - ${detective.persona.direccion} - ${detective.persona.correo}")
             }
         }
     }

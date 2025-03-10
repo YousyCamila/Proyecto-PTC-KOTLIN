@@ -6,4 +6,6 @@ data class Caso(
     val idCliente: String,
     val idDetective: String,
     var activo: Boolean = true
+
+
 )

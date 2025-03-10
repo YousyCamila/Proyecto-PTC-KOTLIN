@@ -1,8 +1,8 @@
 package Casos
 
 import Casos.Models.Caso
-import Casos.Models.Detective
 import Administrador.Clientes.Clientes
+import Administrador.Detectives.Detectives
 
 class CasoService {
     private val nombresPermitidos = mapOf(
@@ -23,7 +23,7 @@ class CasoService {
 
         // Buscar cliente y detective por su ID
         val cliente = Clientes.clientes.firstOrNull { it.persona.id == datos.idCliente }
-        val detective = BaseDatosTemporal.detectives.firstOrNull { it.id == datos.idDetective }
+        val detective = Detectives.listaDetectives.firstOrNull { it.persona.id == datos.idDetective }
 
         if (cliente == null || detective == null) {
             println("Error: Cliente o detective no encontrados.")
@@ -45,8 +45,10 @@ class CasoService {
     }
 
     fun obtenerCasosPorEmailDetective(emailDetective: String): List<Caso> {
-        return BaseDatosTemporal.detectives.firstOrNull { it.correo == emailDetective }?.casos
+        val detective = Detectives.listaDetectives.firstOrNull { it.persona.correo == emailDetective }
             ?: throw IllegalArgumentException("No se encontró un detective con el email: $emailDetective")
+
+        return detective.casos
     }
 
     fun listarCasos(): List<Caso> {
