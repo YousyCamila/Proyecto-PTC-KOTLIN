@@ -1,8 +1,11 @@
 package Administrador.Clientes
+import Casos.Models.Caso
 
 import Persona.Persona
 
 class Clientes(val persona: Persona) {
+
+    private val casos = mutableListOf<Caso>()
 
     private fun datosCliente() {
 
@@ -12,14 +15,17 @@ class Clientes(val persona: Persona) {
         println("Correo: ${persona.correo}")
 
     }
+    fun agregarCaso(caso: Caso) {
+        casos.add(caso)
+    }
 
     companion object {
 
         val clientes = mutableListOf(
 
-            Clientes(Persona("Danna Camila", 321269946, "Crr 17H BIS", "dcami@gmail.com")),
-            Clientes(Persona("Oriana Guerra", 321264566, "Crr 18H BIS", "ori@gmail.com")),
-            Clientes(Persona("Martin Emilio", 311600120, "Crr 25H BIS", "martin@gmail.com"))
+            Clientes(Persona("1","Danna Camila", 321269946, "Crr 17H BIS", "dcami@gmail.com")),
+            Clientes(Persona("2","Oriana Guerra", 321264566, "Crr 18H BIS", "ori@gmail.com")),
+            Clientes(Persona("3","Martin Emilio", 311600120, "Crr 25H BIS", "martin@gmail.com"))
         )
 
 

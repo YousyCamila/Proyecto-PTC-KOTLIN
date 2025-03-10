@@ -6,6 +6,9 @@ import Persona.Persona
 class CRUD : FunAdministrador() {
 
     override fun crear() {
+        print("Ingrese el id")
+        val idCliente = readln()
+
         print("Ingrese el nombre del cliente: ")
         val nomCliente = readln()
 
@@ -21,7 +24,7 @@ class CRUD : FunAdministrador() {
         print("Ingrese el correo: ")
         val correoCliente = readln()
 
-        val nuevoCliente = Clientes(Persona(nomCliente, celCliente, direccCliente, correoCliente))
+        val nuevoCliente = Clientes(Persona(idCliente, nomCliente, celCliente, direccCliente, correoCliente))
         Clientes.clientes.add(nuevoCliente)
 
         println("Cliente agregado exitosamente.")

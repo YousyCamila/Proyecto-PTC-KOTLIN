@@ -1,10 +1,5 @@
-import Administrador.Clientes.CRUD
-import Administrador.Contrato
-
+import Casos.MenuDeCasos
 fun main() {
 
-    val contrato = Contrato()
-   
-
-
+    MenuDeCasos()
 }
