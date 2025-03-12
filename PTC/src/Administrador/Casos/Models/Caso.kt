@@ -1,4 +1,4 @@
-package Casos.Models
+package Administrador.Casos.Models
 
 data class Caso(
     val id: String,

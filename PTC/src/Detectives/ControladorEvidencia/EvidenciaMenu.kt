@@ -1,31 +1,28 @@
-package Evidencia
+package Detectives.ControladorEvidencia
 
-import Casos.Models.Caso
-import java.util.*
+import Administrador.Casos.Models.Caso
 
 class EvidenciaMenu {
     fun gestionarCasos() {
-        val scanner = Scanner(System.`in`)
         val casos = mutableListOf<Caso>()
 
         while (true) {
-            println("\n=== Gestión de Casos ===")
+            println("\n=== Gestión de Administrador.Casos ===")
             println("1. Crear Caso")
-            println("2. Listar Casos")
+            println("2. Listar Administrador.Casos")
             println("3. Volver al Menú Principal")
             print("Seleccione una opción: ")
 
-            when (scanner.nextInt()) {
+            when (readln().toIntOrNull()) {
                 1 -> {
-                    scanner.nextLine()
                     print("Ingrese el ID del caso: ")
-                    val id = scanner.nextLine()
+                    val id = readln()
                     print("Ingrese el nombre del caso: ")
-                    val nombreCaso = scanner.nextLine()
+                    val nombreCaso = readln()
                     print("Ingrese el ID del cliente: ")
-                    val idCliente = scanner.nextLine()
+                    val idCliente = readln()
                     print("Ingrese el ID del detective: ")
-                    val idDetective = scanner.nextLine()
+                    val idDetective = readln()
 
                     casos.add(Caso(id, nombreCaso, idCliente, idDetective))
                     println("Caso creado exitosamente.")
@@ -34,7 +31,7 @@ class EvidenciaMenu {
                     if (casos.isEmpty()) {
                         println("No hay casos registrados.")
                     } else {
-                        println("\n=== Lista de Casos ===")
+                        println("\n=== Lista de Administrador.Casos ===")
                         casos.forEachIndexed { index, caso ->
                             println("${index + 1}. ID: ${caso.id} - Nombre: ${caso.nombreCaso} - Cliente: ${caso.idCliente} - Detective: ${caso.idDetective}")
                         }
@@ -45,5 +42,4 @@ class EvidenciaMenu {
             }
         }
     }
-
 }

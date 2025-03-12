@@ -1,4 +1,4 @@
-package Administrador
+package Administrador.Detectives.ControladorDetectives
 
  abstract class FunAdministrador {
 

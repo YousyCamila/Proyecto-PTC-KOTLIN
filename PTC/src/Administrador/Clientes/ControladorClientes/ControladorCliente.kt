@@ -1,9 +1,10 @@
-package Administrador.Clientes
+package Administrador.Clientes.ControladorClientes
 
-import Administrador.FunAdministrador
+import Administrador.Clientes.ModelsCliente.Clientes
+import Administrador.Detectives.ControladorDetectives.FunAdministrador
 import Persona.Persona
 
-class CRUD : FunAdministrador() {
+class ControladorCliente : FunAdministrador() {
 
     override fun crear() {
         print("Ingrese el id")

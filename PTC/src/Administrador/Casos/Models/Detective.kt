@@ -1,4 +1,4 @@
-package Casos.Models
+package Administrador.Casos.Models
 
 class Detective(
     val id: String,

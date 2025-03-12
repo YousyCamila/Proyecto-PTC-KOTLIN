@@ -1,9 +1,11 @@
 package Administrador.Clientes
 
+import Administrador.Clientes.ControladorClientes.ControladorCliente
+
 class ClienteMenu {
     fun MenuDeCliente(){
 
-        val crud = CRUD()
+        val controladorCliente = ControladorCliente()
 
         while (true) {
             println("\n--- Menú de Gestión de Clientes ---")
@@ -15,10 +17,10 @@ class ClienteMenu {
             print("Seleccione una opción: ")
 
             when (readln()) {
-                "1" -> crud.crear()
-                "2" -> crud.editar()
-                "3" -> crud.eliminar()
-                "4" -> crud.mostrarClientes()
+                "1" -> controladorCliente.crear()
+                "2" -> controladorCliente.editar()
+                "3" -> controladorCliente.eliminar()
+                "4" -> controladorCliente.mostrarClientes()
                 "5" -> {
                     println("Saliendo...")
                     break

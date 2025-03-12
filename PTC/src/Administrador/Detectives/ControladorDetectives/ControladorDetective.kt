@@ -1,9 +1,9 @@
-package Administrador.Detectives
-import Administrador.FunAdministrador
+package Administrador.Detectives.ControladorDetectives
+import Administrador.Detectives.ModelsDetectives.Detectives
 import Persona.Persona
 import java.io.IO.*
 
-class CroodDetective : FunAdministrador() {
+class ControladorDetective : FunAdministrador() {
 
     override fun crear() {
 

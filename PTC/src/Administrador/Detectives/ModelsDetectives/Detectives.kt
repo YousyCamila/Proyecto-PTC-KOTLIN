@@ -1,5 +1,5 @@
-package Administrador.Detectives
-import Casos.Models.Caso
+package Administrador.Detectives.ModelsDetectives
+import Administrador.Casos.Models.Caso
 
 
 import Persona.Persona

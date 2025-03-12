@@ -1,5 +1,5 @@
-package Administrador.Clientes
-import Casos.Models.Caso
+package Administrador.Clientes.ModelsCliente
+import Administrador.Casos.Models.Caso
 
 import Persona.Persona
 

@@ -1,6 +1,4 @@
-package Evidencia
-
-import Casos.Models.Caso
+package Clientes.Evidencia.ModelsEvidencia
 
 class Evidencia(
     private var id: String,

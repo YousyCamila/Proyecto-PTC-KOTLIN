@@ -1,12 +1,13 @@
-package Administrador
+package Administrador.Contrato.ModelsContrato
 
-import Administrador.Clientes.Clientes
+import Administrador.Clientes.ModelsCliente.Clientes
+import Administrador.Contrato.ControladorContrato.Contrato
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Contrato {
+class ModelContrato {
     companion object {
-        val listaContratos = mutableListOf<DatosContrato>()
+        val listaContratos = mutableListOf<Contrato>()
     }
 
     fun agregarContrato() {
@@ -52,7 +53,7 @@ class Contrato {
         val estado = readln().toBoolean()
 
 
-        val nuevoContrato = DatosContrato(descripcion, fechaInicio, fechaCierre, clausulas, tarifa, estado, clienteSeleccionado)
+        val nuevoContrato = Contrato(descripcion, fechaInicio, fechaCierre, clausulas, tarifa, estado, clienteSeleccionado)
         listaContratos.add(nuevoContrato)
 
         println(" Contrato creado con éxito para el cliente ${clienteSeleccionado.persona.nombre}.")

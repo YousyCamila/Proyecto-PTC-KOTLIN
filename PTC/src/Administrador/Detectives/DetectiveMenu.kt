@@ -1,9 +1,10 @@
 package Administrador.Detectives
-import Administrador.Detectives.CroodDetective
+
+import Administrador.Detectives.ControladorDetectives.ControladorDetective
 
 class DetectiveMenu {
     fun MenuDeDetectives(){
-        val crudDetective = CroodDetective()
+        val crudDetective = ControladorDetective()
 
         while (true) {
             println("\n--- Menú de Gestión de Detectives ---")

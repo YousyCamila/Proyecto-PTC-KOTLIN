@@ -1,23 +1,23 @@
-import java.util.Scanner
-import Evidencia.Evidencia
-import Evidencia.TipoEvidencia
+package Detectives.ControladorEvidencia.ControladorEvidencia
 
-class EvidenciaCRUD {
+import Clientes.Evidencia.ModelsEvidencia.Evidencia
+import Clientes.Evidencia.ModelsEvidencia.TipoEvidencia
+
+class ControladorEvidencia {
     private val evidencias = mutableListOf<Evidencia>()
-    private val scanner = Scanner(System.`in`)
 
     fun iniciar() {
         while (true) {
             println("\n--- Gestión de Evidencias ---")
-            println("1. Agregar Evidencia")
-            println("2. Editar Evidencia")
-            println("3. Eliminar Evidencia")
+            println("1. Agregar Clientes.Evidencia")
+            println("2. Editar Clientes.Evidencia")
+            println("3. Eliminar Clientes.Evidencia")
             println("4. Mostrar Evidencias")
             println("5. Buscar Evidencias por ID de Caso")
             println("6. Salir")
             print("Seleccione una opción: ")
 
-            when (scanner.nextInt()) {
+            when (readln().toIntOrNull()) {
                 1 -> agregarEvidencia()
                 2 -> editarEvidencia()
                 3 -> eliminarEvidencia()
@@ -33,40 +33,22 @@ class EvidenciaCRUD {
     }
 
     private fun agregarEvidencia() {
-        scanner.nextLine() // Consumir el salto de línea que queda después de nextInt()
-
         print("Ingrese el ID del caso relacionado: ")
-        val idCaso = scanner.nextLine()
-        if (idCaso.isBlank()) {
-            println("Error: El ID del caso es obligatorio.")
-            return
-        }
+        val idCaso = readln().takeIf { it.isNotBlank() } ?: return println("Error: El ID del caso es obligatorio.")
 
         print("Ingrese el ID de la evidencia: ")
-        val id = scanner.nextLine()
-        if (id.isBlank()) {
-            println("Error: El ID de la evidencia es obligatorio.")
-            return
-        }
+        val id = readln().takeIf { it.isNotBlank() } ?: return println("Error: El ID de la evidencia es obligatorio.")
 
         print("Ingrese la descripción: ")
-        val descripcion = scanner.nextLine()
-        if (descripcion.isBlank()) {
-            println("Error: La descripción es obligatoria.")
-            return
-        }
+        val descripcion = readln().takeIf { it.isNotBlank() } ?: return println("Error: La descripción es obligatoria.")
 
         print("Ingrese la fecha (YYYY-MM-DD): ")
-        val fecha = scanner.nextLine()
-        if (fecha.isBlank()) {
-            println("Error: La fecha es obligatoria.")
-            return
-        }
+        val fecha = readln().takeIf { it.isNotBlank() } ?: return println("Error: La fecha es obligatoria.")
 
         val tipo = seleccionarTipoEvidencia()
 
         evidencias.add(Evidencia(id, descripcion, fecha, tipo, idCaso))
-        println("Evidencia agregada exitosamente.")
+        println("Clientes.Evidencia agregada exitosamente.")
     }
 
     private fun editarEvidencia() {
@@ -74,41 +56,24 @@ class EvidenciaCRUD {
         if (evidencias.isEmpty()) return
 
         print("Seleccione el índice de la evidencia a editar: ")
-        val indice = scanner.nextInt()
-        scanner.nextLine() // Consumir el salto de línea
+        val indice = readln().toIntOrNull() ?: return println("Índice inválido.")
 
         if (indice in evidencias.indices) {
             print("Nuevo ID: ")
-            val nuevoId = scanner.nextLine()
-            if (nuevoId.isBlank()) {
-                println("Error: El ID de la evidencia es obligatorio.")
-                return
-            }
+            val nuevoId = readln().takeIf { it.isNotBlank() } ?: return println("Error: El ID de la evidencia es obligatorio.")
 
             print("Nueva descripción: ")
-            val nuevaDescripcion = scanner.nextLine()
-            if (nuevaDescripcion.isBlank()) {
-                println("Error: La descripción es obligatoria.")
-                return
-            }
+            val nuevaDescripcion = readln().takeIf { it.isNotBlank() } ?: return println("Error: La descripción es obligatoria.")
 
             print("Nueva fecha (YYYY-MM-DD): ")
-            val nuevaFecha = scanner.nextLine()
-            if (nuevaFecha.isBlank()) {
-                println("Error: La fecha es obligatoria.")
-                return
-            }
+            val nuevaFecha = readln().takeIf { it.isNotBlank() } ?: return println("Error: La fecha es obligatoria.")
 
             val nuevoTipo = seleccionarTipoEvidencia()
             print("Nuevo ID del caso relacionado: ")
-            val nuevoIdCaso = scanner.nextLine()
-            if (nuevoIdCaso.isBlank()) {
-                println("Error: El ID del caso es obligatorio.")
-                return
-            }
+            val nuevoIdCaso = readln().takeIf { it.isNotBlank() } ?: return println("Error: El ID del caso es obligatorio.")
 
             evidencias[indice] = Evidencia(nuevoId, nuevaDescripcion, nuevaFecha, nuevoTipo, nuevoIdCaso)
-            println("Evidencia actualizada.")
+            println("Clientes.Evidencia actualizada.")
         } else {
             println("Índice inválido.")
         }
@@ -119,12 +84,11 @@ class EvidenciaCRUD {
         if (evidencias.isEmpty()) return
 
         print("Seleccione el índice de la evidencia a eliminar: ")
-        val indice = scanner.nextInt()
-        scanner.nextLine() // Consumir el salto de línea
+        val indice = readln().toIntOrNull() ?: return println("Índice inválido.")
 
         if (indice in evidencias.indices) {
             evidencias.removeAt(indice)
-            println("Evidencia eliminada.")
+            println("Clientes.Evidencia eliminada.")
         } else {
             println("Índice inválido.")
         }
@@ -140,9 +104,8 @@ class EvidenciaCRUD {
     }
 
     private fun buscarEvidenciasPorCaso() {
-        scanner.nextLine() // Consumir el salto de línea
         print("Ingrese el ID del caso: ")
-        val idCaso = scanner.nextLine()
+        val idCaso = readln()
 
         val evidenciasFiltradas = evidencias.filter { it.idCaso == idCaso }
         if (evidenciasFiltradas.isEmpty()) {
@@ -161,7 +124,7 @@ class EvidenciaCRUD {
             println("3. Documento")
             println("4. Audio")
             print("Opción: ")
-            when (scanner.nextInt()) {
+            when (readln().toIntOrNull()) {
                 1 -> return TipoEvidencia.IMAGEN
                 2 -> return TipoEvidencia.VIDEO
                 3 -> return TipoEvidencia.DOCUMENTO

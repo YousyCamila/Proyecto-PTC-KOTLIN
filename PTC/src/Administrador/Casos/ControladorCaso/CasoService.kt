@@ -1,8 +1,8 @@
-package Casos
+package Administrador.Casos.ControladorCaso
 
-import Casos.Models.Caso
-import Administrador.Clientes.Clientes
-import Administrador.Detectives.Detectives
+import Administrador.Casos.Models.Caso
+import Administrador.Clientes.ModelsCliente.Clientes
+import Administrador.Detectives.ModelsDetectives.Detectives
 
 class CasoService {
     private val nombresPermitidos = mapOf(

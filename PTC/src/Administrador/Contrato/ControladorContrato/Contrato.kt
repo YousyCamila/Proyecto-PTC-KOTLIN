@@ -1,9 +1,9 @@
-package Administrador
+package Administrador.Contrato.ControladorContrato
 
-import Administrador.Clientes.Clientes
+import Administrador.Clientes.ModelsCliente.Clientes
 import java.util.*
 
-class DatosContrato(
+class Contrato(
     private var descripcionServicio: String,
     private var fechaInicio: Date,
     private var fechaCierre: Date,
