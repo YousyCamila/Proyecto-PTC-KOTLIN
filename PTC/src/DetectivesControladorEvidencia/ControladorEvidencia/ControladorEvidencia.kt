@@ -1,7 +1,7 @@
-package Detectives.ControladorEvidencia.ControladorEvidencia
+package DetectivesControladorEvidencia.ControladorEvidencia
 
 import Clientes.Evidencia.ModelsEvidencia.Evidencia
-import Clientes.Evidencia.ModelsEvidencia.TipoEvidencia
+import ClientesEvidencia.ModelsEvidencia.TipoEvidencia
 
 class ControladorEvidencia {
     private val evidencias = mutableListOf<Evidencia>()

@@ -1,4 +1,4 @@
-package Clientes.Evidencia.ModelsEvidencia
+package ClientesEvidencia.ModelsEvidencia
 
 enum class TipoEvidencia {
     IMAGEN, VIDEO, DOCUMENTO, AUDIO

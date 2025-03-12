@@ -1,5 +1,7 @@
 package Clientes.Evidencia.ModelsEvidencia
 
+import ClientesEvidencia.ModelsEvidencia.TipoEvidencia
+
 class Evidencia(
     private var id: String,
     private var descripcion: String,

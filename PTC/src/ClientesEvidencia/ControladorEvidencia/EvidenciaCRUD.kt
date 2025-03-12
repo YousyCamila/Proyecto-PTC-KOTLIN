@@ -1,7 +1,7 @@
-package Clientes.Evidencia.ControladorEvidencia
+package ClientesEvidencia.ControladorEvidencia
 
 import Clientes.Evidencia.ModelsEvidencia.Evidencia
-import Clientes.Evidencia.ModelsEvidencia.TipoEvidencia
+import ClientesEvidencia.ModelsEvidencia.TipoEvidencia
 
 class EvidenciaCRUD {
     private val evidencias = mutableListOf<Evidencia>()

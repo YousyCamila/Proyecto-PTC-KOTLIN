@@ -1,4 +1,4 @@
-package Clientes.Evidencia
+package DetectivesControladorEvidencia
 
 import Administrador.Casos.Models.Caso
 

@@ -1,4 +1,4 @@
-package Clientes.Evidencia.ModelsEvidencia
+package ClientesEvidencia.ModelsEvidencia
 
 class Evidencia(
     private var id: String,
