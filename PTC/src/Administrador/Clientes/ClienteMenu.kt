@@ -17,9 +17,9 @@ class ClienteMenu {
             print("Seleccione una opción: ")
 
             when (readln()) {
-                "1" -> controladorCliente.crear()
-                "2" -> controladorCliente.editar()
-                "3" -> controladorCliente.eliminar()
+                "1" -> controladorCliente.agregarCliente()
+                "2" -> controladorCliente.editarCliente()
+                "3" -> controladorCliente.eliminarCliente()
                 "4" -> controladorCliente.mostrarClientes()
                 "5" -> {
                     println("Saliendo...")

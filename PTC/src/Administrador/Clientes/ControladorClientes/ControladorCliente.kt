@@ -1,13 +1,28 @@
 package Administrador.Clientes.ControladorClientes
 
+import Administrador.Clientes.ClientesDAO.ClientesDAO
 import Administrador.Clientes.ModelsCliente.Clientes
 import Administrador.Detectives.ControladorDetectives.FunAdministrador
 import Persona.Persona
 
-class ControladorCliente : FunAdministrador() {
+class ControladorCliente {
 
-    override fun crear() {
-        print("Ingrese el id")
+    private val clientesDAO = ClientesDAO()
+
+    fun mostrarClientes() {
+        val clientes = clientesDAO.obtenerTodosLosClientes()
+        if (clientes.isEmpty()) {
+            println("No hay clientes registrados.")
+        } else {
+            println("\n=== Lista de Clientes ===")
+            clientes.forEachIndexed { index, cliente ->
+                println("${index + 1}. ${cliente.persona.id} - ${cliente.persona.nombre} - ${cliente.persona.celular} - ${cliente.persona.direccion} - ${cliente.persona.correo}")
+            }
+        }
+    }
+
+    fun agregarCliente() {
+        print("Ingrese el id: ")
         val idCliente = readln()
 
         print("Ingrese el nombre del cliente: ")
@@ -26,29 +41,26 @@ class ControladorCliente : FunAdministrador() {
         val correoCliente = readln()
 
         val nuevoCliente = Clientes(Persona(idCliente, nomCliente, celCliente, direccCliente, correoCliente))
-        Clientes.clientes.add(nuevoCliente)
 
-        println("Cliente agregado exitosamente.")
+        if (clientesDAO.insertarCliente(nuevoCliente)) {
+            println("Cliente agregado exitosamente.")
+        } else {
+            println("Error al agregar el cliente.")
+        }
     }
 
-    override fun editar() {
-        if (Clientes.clientes.isEmpty()) {
-            println("No hay clientes para editar.")
+    fun editarCliente() {
+        print("Ingrese el ID del cliente a editar: ")
+        val idCliente = readln()
+
+        val clientes = clientesDAO.obtenerTodosLosClientes()
+        val clienteSeleccionado = clientes.find { it.persona.id == idCliente }
+
+        if (clienteSeleccionado == null) {
+            println("Cliente no encontrado.")
             return
         }
 
-        println("Seleccione el cliente a editar:")
-        Clientes.clientes.forEachIndexed { index, cliente ->
-            println("${index + 1}. ${cliente.persona.nombre}")
-        }
-
-        val seleccion = readln().toIntOrNull()
-        if (seleccion == null || seleccion !in 1..Clientes.clientes.size) {
-            println("Selección inválida.")
-            return
-        }
-
-        val clienteSeleccionado = Clientes.clientes[seleccion - 1]
         println("Editando cliente: ${clienteSeleccionado.persona.nombre}")
 
         println("1. Nombre")
@@ -74,50 +86,27 @@ class ControladorCliente : FunAdministrador() {
                 print("Ingrese el nuevo correo: ")
                 clienteSeleccionado.persona.correo = readln()
             }
-            else -> println("Opción inválida.")
-        }
-
-        println("Cliente actualizado correctamente.")
-    }
-
-    override fun eliminar() {
-        if (Clientes.clientes.isEmpty()) {
-            println("No hay clientes para eliminar.")
-            return
-        }
-
-        println("Seleccione el cliente a eliminar:")
-        Clientes.clientes.forEachIndexed { index, cliente ->
-            println("${index + 1}. ${cliente.persona.nombre}")
-        }
-
-        val seleccion = readln().toIntOrNull()
-        if (seleccion == null || seleccion !in 1..Clientes.clientes.size) {
-            println("Selección inválida.")
-            return
-        }
-
-        val clienteSeleccionado = Clientes.clientes[seleccion - 1]
-        println("¿Está seguro de eliminar a ${clienteSeleccionado.persona.nombre}? (1: Sí, 2: No)")
-
-        when (readln()) {
-            "1" -> {
-                Clientes.clientes.removeAt(seleccion - 1)
-                println("Cliente eliminado exitosamente.")
+            else -> {
+                println("Opción inválida.")
+                return
             }
-            "2" -> println("Operación cancelada.")
-            else -> println("Opción inválida.")
         }
-    }
 
-    fun mostrarClientes() {
-        if (Clientes.clientes.isEmpty()) {
-            println("No hay clientes registrados.")
+        if (clientesDAO.actualizarCliente(clienteSeleccionado)) {
+            println("Cliente actualizado correctamente.")
         } else {
-            println("\n=== Lista de Clientes ===")
-            Clientes.clientes.forEachIndexed { index, cliente ->
-                println("${index + 1}. ${cliente.persona.id} - ${cliente.persona.nombre} - ${cliente.persona.celular} - ${cliente.persona.direccion} - ${cliente.persona.correo}")
-            }
+            println("Error al actualizar el cliente.")
+        }
+    }
+
+    fun eliminarCliente() {
+        print("Ingrese el ID del cliente a eliminar: ")
+        val idCliente = readln()
+
+        if (clientesDAO.eliminarCliente(idCliente)) {
+            println("Cliente eliminado exitosamente.")
+        } else {
+            println("Error al eliminar el cliente.")
         }
     }
 }
